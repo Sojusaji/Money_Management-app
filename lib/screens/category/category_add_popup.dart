@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:money_management/screens/models/category/category_model.dart';
 
+ValueNotifier<CategoryType> SelectedCategoryNotifier =
+    ValueNotifier(CategoryType.income);
 Future<void> ShowCategoryAddPopup(BuildContext context) async {
   showDialog(
       context: context,
@@ -46,10 +48,20 @@ class RadioButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Radio<CategoryType>(
-            value: type,
-            groupValue: CategoryType.income,
-            onChanged: (value) {}),
+        ValueListenableBuilder(
+            valueListenable: SelectedCategoryNotifier,
+            builder: (BuildContext ctx, CategoryType newCategory, Widget? _) {
+              return Radio<CategoryType>(
+                  value: type,
+                  groupValue: newCategory,
+                  onChanged: (value) {
+                    if (value == null) {
+                      return;
+                    }
+                    SelectedCategoryNotifier.value = value;
+                    SelectedCategoryNotifier.notifyListeners();
+                  });
+            }),
         Text(title),
       ],
     );
