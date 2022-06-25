@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_management/screens/add_transaction/screen_add_transaction.dart';
 import 'package:money_management/screens/category/category_add_popup.dart';
 import 'package:money_management/screens/category/screen_category.dart';
 import 'package:money_management/screens/db/category/category_db.dart';
@@ -28,6 +29,7 @@ class ScreenHome extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           if (selectedIndexNotifier.value == 0) {
+            Navigator.of(context).pushNamed(ScreenaddTransaction.routeName);
             print('Add transactions');
           } else {
             print('Add category');
