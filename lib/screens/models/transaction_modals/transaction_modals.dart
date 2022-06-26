@@ -2,7 +2,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:money_management/screens/models/category/category_model.dart';
 part 'transaction_modals.g.dart';
 
-@HiveType(typeId: 2)
+@HiveType(typeId: 3)
 class TransactionModals {
   @HiveField(0)
   final String purpose;
@@ -19,11 +19,16 @@ class TransactionModals {
   @HiveField(4)
   final CategoryModel category;
 
+  @HiveField(5)
+  String? id;
+
   TransactionModals({
     required this.purpose,
     required this.amount,
     required this.date,
     required this.type,
     required this.category,
-  });
+  }) {
+    id = DateTime.now().millisecondsSinceEpoch.toString();
+  }
 }

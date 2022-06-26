@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:money_management/screens/category/Expense_Category_List.dart';
 import 'package:money_management/screens/category/category_add_popup.dart';
 import 'package:money_management/screens/db/category/category_db.dart';
+import 'package:money_management/screens/db/transactions/transaction_db.dart';
 import 'package:money_management/screens/models/category/category_model.dart';
 import 'package:money_management/screens/models/transaction_modals/transaction_modals.dart';
 
@@ -183,5 +184,8 @@ class _ScreenaddTransactionState extends State<ScreenaddTransaction> {
       type: _selectedCategoryType!,
       category: _selectedCategoryModel!,
     );
+    await TransactionDB.instance.addTransaction(_modal);
+    Navigator.of(context).pop();
+    TransactionDB.instance.refresh();
   }
 }
